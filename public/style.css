@@ -6,14 +6,23 @@ body {
     font-family: 'Fleur De Leah', cursive;
 }
 
-.title {
+.title-container {
     position: absolute;
     bottom: 20px;
     width: 100%;
     text-align: center;
-    font-size: 3em;
     color: #f0e68c; /* Khaki color for the title */
     text-shadow: 0 0 10px #f0e68c;
+    z-index: 10; /* Ensure it's on top of the canvas */
+}
+
+.title {
+    font-size: 3em;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    margin-top: 10px;
 }
 
 #bg {
