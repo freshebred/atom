@@ -3,22 +3,40 @@ const scene = new THREE.Scene();
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 5;
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
   antialias: true,
 });
-renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
-// Handle window resizing
-window.addEventListener('resize', () => {
+function adjustCameraAndRenderer() {
     camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-});
+
+    // Adjust camera position to fit the atom (diameter 8) in 75% of the view
+    const atomDiameter = 8; // Diameter of electron cloud
+    const margin = 0.75;
+    const fovInRadians = camera.fov * (Math.PI / 180);
+
+    // Calculate distance needed to fit the atom vertically
+    const distanceV = (atomDiameter / 2) / (Math.tan(fovInRadians / 2) * margin);
+
+    // Calculate distance needed to fit the atom horizontally
+    const distanceH = distanceV / camera.aspect;
+
+    // Use the larger of the two distances to ensure the atom is fully visible
+    camera.position.z = Math.max(distanceV, distanceH);
+
+    camera.updateProjectionMatrix();
+}
+
+// Handle window resizing
+window.addEventListener('resize', adjustCameraAndRenderer);
+
+// Initial setup
+adjustCameraAndRenderer();
 
 // --- NUCLEUS ---
 const nucleus = new THREE.Group();
