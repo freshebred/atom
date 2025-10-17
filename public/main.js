@@ -112,7 +112,7 @@ function setRandomPositionInSphere(object, radius) {
 
 // --- ANIMATION ---
 const clock = new THREE.Clock();
-const rotationSpeed = (2 * Math.PI) / 10; // Revolutions per second to radians per second
+const rotationSpeed = (2 * Math.PI) / 20; // Revolutions per second to radians per second
 
 let lastElectronUpdate = 0;
 
@@ -134,7 +134,7 @@ function animate() {
     atom.rotation.x = rotationSpeed * elapsedTime * 0.5; // Add some x-axis tilt
 
     // Update electron positions
-    if (elapsedTime - lastElectronUpdate > 0.1) { // 100ms
+    if (elapsedTime - lastElectronUpdate > 0.02) { // 100ms
         electrons.forEach(electron => {
             setRandomPositionInSphere(electron, 4);
         });
