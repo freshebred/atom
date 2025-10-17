@@ -70,7 +70,7 @@ const cloudGeometry = new THREE.SphereGeometry(4, 64, 64);
 const cloudMaterial = new THREE.MeshStandardMaterial({
     color: 0xffa500, // Orange
     transparent: true,
-    opacity: 0.1,
+    opacity: 0.2,
     metalness: 0.1,
     roughness: 0.8,
 });
@@ -86,7 +86,7 @@ const electronMaterial = new THREE.MeshStandardMaterial({
 });
 
 for (let i = 0; i < 10; i++) {
-    const electron = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 16), electronMaterial);
+    const electron = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), electronMaterial);
     setRandomPositionInSphere(electron, 4);
     electrons.push(electron);
     scene.add(electron);
